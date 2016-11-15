@@ -7,7 +7,7 @@
           <img class="logo" src="./assets/logo.png" alt="logo">
         </router-link>
         <router-link to="/javascript">Go to javascript</router-link>
-        <router-link to="/bar">Go to Bar</router-link>
+        <router-link to="/vuejs">Go to Vue.js</router-link>
         <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank">
           Built with Vue.js
         </a>
@@ -16,7 +16,7 @@
 
 
     <div class="container">
-      <transition name="component-fade" mode="out-in">
+      <transition name="fade" mode="out-in">
         <router-view></router-view>
       </transition>
     </div>
@@ -46,7 +46,7 @@
   }
 
   .header .inner {
-    max-width: 800px;
+    max-width: 100%;
     box-sizing: border-box;
     margin: 0 auto;
     padding: 15px 5px

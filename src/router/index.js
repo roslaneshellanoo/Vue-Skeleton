@@ -5,9 +5,10 @@ Vue.use(VueRouter)
 
 import home from '../pages/home.vue'
 import javascript from '../pages/javascript.vue'
+import vuejs from '../pages/vuejs.vue'
 
 
-const Bar = { template: '<div>bar</div>' }
+//const Bar = { template: '<div>bar</div>' }
 
 
 export default new VueRouter({
@@ -15,6 +16,6 @@ export default new VueRouter({
     routes: [
         { path: '/', component: home },
         { path: '/javascript', component: javascript },
-        { path: '/bar', component: Bar }
+        { path: '/vuejs', component: vuejs }
     ]
 })
