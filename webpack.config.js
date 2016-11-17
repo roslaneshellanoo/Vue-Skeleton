@@ -17,6 +17,11 @@ module.exports = {
           // vue-loader options go here
         }
       },
+
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'},
+
       {
         test: /\.js$/,
         loader: 'babel-loader',

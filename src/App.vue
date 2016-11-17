@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-md-theme="'default'">
 
     <div class="header">
       <div class="inner">
@@ -11,6 +11,7 @@
         <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank">
           Built with Vue.js
         </a>
+
       </div>
     </div>
 
@@ -35,6 +36,15 @@
   }
   a {
     text-decoration: none
+  }
+
+  div#app {
+    padding: 2rem 0;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: auto;
   }
   .header {
     background-color: #167a8b;
@@ -129,11 +139,6 @@
   }
 
 
-  .rex {
-    margin:0;
-    a{
-      color: red;
-    }
-  }
+
   
 </style>
