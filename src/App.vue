@@ -1,6 +1,5 @@
 <template>
-  <div id="app" v-md-theme="'default'">
-
+  <div id="app"  v-md-theme="'default'">
     <div class="header">
       <div class="inner">
         <router-link to="/" exact>
@@ -25,6 +24,38 @@
   </div>
 </template>
 
+<script>
+  import Home from './pages/Home.vue'
+  import Javascript from './pages/Javascript.vue'
+  import Vuejs from './pages/Vuejs.vue'
+
+  export default {
+    name: 'app',
+    data() {
+      return {
+        posts: []
+      };
+    },
+
+    created: function () {
+      this.fetchPosts();
+    },
+
+    methods: {
+      fetchPosts: function(){
+
+        this.$http.get('http://ip-api.com/json').then((response) => {
+          this.posts = response.data;
+
+        }, (errorResponse) => {
+          // Handle error...
+          console.log('API responded with:', errorResponse.status);
+        });
+
+      }
+    }
+  }
+</script>
 
 <style lang="sass">
   body {
@@ -45,6 +76,7 @@
   .container {
     max-width: 960px;
     margin: auto;
+    padding: 0 1rem;
   }
   .header {
     background-color: #167a8b;
@@ -52,7 +84,11 @@
     z-index: 999;
     top: 0;
     left: 0;
-    right: 0
+    right: 0;
+      
+      a{
+        color: #fff!important;
+      }
   }
 
   .header .inner {
@@ -138,7 +174,31 @@
     }
   }
 
+  h1.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 800px;
+    background: rgba(0, 0, 0, 0.55);
+    text-align: center;
+    z-index: 999999;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    transition: all 350ms ease;
+  }
 
+  .md-card {
+    width: 100%;
+    max-width: 340px;
+    margin: 1rem;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+  }
 
   
 </style>

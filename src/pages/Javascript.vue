@@ -55,6 +55,8 @@
 </template>
 
 
-export default {
-name: 'javascript'
-}
+<script>
+  export default {
+    name: 'javascript'
+  }
+</script>

@@ -1,8 +1,14 @@
 import Vue from 'vue'
 
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
+
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+Vue.use(VueAxios, axios)
+
 import router from './router'
 import App from './App.vue'
-
 
 
 import VueMaterial from 'vue-material'
@@ -15,10 +21,14 @@ Vue.material.theme.register('default', {
 })
 
 
-const app = new Vue({
 
+const app = new Vue({
+      el: '#app',
       router,
       render: h => h(App)
-}).$mount('#app');
+})
 
-export {app, router}
+// export {app, router}
+
+//////////
+////////////////////////
