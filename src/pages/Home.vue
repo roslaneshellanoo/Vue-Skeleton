@@ -34,14 +34,31 @@
 
                         <p></p>
 
-                        <input class="form-control" type="text"
-                               placeholder="Type the library name here, then click the button below."
-                               v-model="newlibrary">
-                        <button class="btn btn-info" v-on:click="addLibrary">Click to add library
-                        </button>
-                        <button class="btn btn-danger" v-on:click="deleteLibraries">Click to delete
+
+
+
+                        <md-input-container md-inline>
+
+                            <md-input  placeholder="Type the library name here, then click the button below."
+                                       v-model="newlibrary"></md-input>
+                        </md-input-container>
+
+
+                        <md-button class="md-raised md-primary" v-on:click="addLibrary">
+                            Click to add library
+                        </md-button>
+
+
+
+                        <md-button class="md-raised md-warn" v-on:click="deleteLastLibrary">
+                            Click to delete
+                            last library
+                        </md-button>
+
+                        <md-button class="md-raised md-accent" v-on:click="deleteLibraries">
+                            Click to delete
                             all libraries
-                        </button>
+                        </md-button>
 
                         <p></p>
 
@@ -88,6 +105,10 @@
 
             deleteLibraries: function () {
                 this.libraries = [];
+            },
+
+            deleteLastLibrary: function () {
+                this.libraries.pop();
             },
 
             reverse,
