@@ -1,5 +1,6 @@
 <template>
-<div class="vuejs">
+
+<section class="vuejs">
   <div class="container">
     <h1>Vue.js Guide</h1>
 
@@ -21,7 +22,9 @@
 
   </div>
 
-</div>
+
+
+</section>
 </template>
 
 

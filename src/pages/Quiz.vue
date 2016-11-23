@@ -5,29 +5,36 @@
             <h2 class="md-display-2">Javascript Quiz</h2>
 
             <!-- index is used to check with current question index -->
+
             <div v-for="(question, index) in quiz.questions">
                 <!-- Hide all questions, show only the one with index === to current question index -->
                 <div v-show="index === questionIndex">
                     <h2>{{ question.text }}</h2>
                     <ol>
                         <li v-for="response in question.responses">
-                           <!--<label>-->
-                                <!--&lt;!&ndash;&lt;!&ndash; The radio button has three new directives &ndash;&gt;&ndash;&gt;-->
-                                <!--&lt;!&ndash;&lt;!&ndash; v-bind:value sets "value" to "true" if the response is correct &ndash;&gt;&ndash;&gt;-->
-                                <!--&lt;!&ndash;&lt;!&ndash; v-bind:name sets "name" to question index to group answers by question &ndash;&gt;&ndash;&gt;-->
-                                <!--&lt;!&ndash;&lt;!&ndash; v-model creates binding with userResponses &ndash;&gt;&ndash;&gt;-->
-                                <!--<input type="radio"-->
-                                       <!--v-bind:value="response.correct"-->
-                                       <!--v-bind:name="index"-->
-                                       <!--v-model="userResponses[index]"> {{response.text}}-->
-                            <!--</label>-->
-                            <div>
-                                <mu-radio  v-model="userResponses[index]" :label="response.text" :name="index" :nativeValue="response.correct" /> <br/>
 
+                                <!--&lt;!&ndash; The radio button has three new directives &ndash;&gt;-->
+                                <!--&lt;!&ndash; v-bind:value sets "value" to "true" if the response is correct &ndash;&gt;-->
+                                <!--&lt;!&ndash; v-bind:name sets "name" to question index to group answers by question &ndash;&gt;-->
+                                <!--&lt;!&ndash; v-model creates binding with userResponses &ndash;&gt;-->
 
-                            </div>
-
-
+                            <label class="mu-radio">
+                                <input type="radio"
+                                       v-bind:value="response.id"
+                                       v-bind:name="index"
+                                       v-model="userResponses[index]">
+                                <div class="mu-radio-wrapper">
+                                    <div class="mu-ripple-wrapper mu-radio-ripple-wrapper"></div>
+                                    <!---->
+                                    <div class="mu-radio-icon">
+                                        <i aria-hidden="true"
+                                           class="mu-icon material-icons mu-radio-icon-uncheck radio_button_unchecked">radio_button_unchecked</i>
+                                        <i aria-hidden="true"
+                                           class="mu-icon material-icons mu-radio-icon-checked radio_button_checked">radio_button_checked</i></div>
+                                    <div class="mu-radio-label">{{response.text}}</div>
+                                </div>
+                                <!---->
+                            </label>
 
 
                         </li>
@@ -61,28 +68,39 @@
         name: 'quiz',
         data() {
 
-            var oldTrue = true;
-            var trueString = oldTrue.toString();
-            var oldFalse = true;
-            var trueString = oldTrue.toString();
-
             var quiz = {
                         title: 'My quiz',
                         questions: [
                             {
                                 text: "Question 1",
                                 responses: [
-                                    {text: 'Wrong, too bad.', correct: false},
-                                    {text: 'Right!', correct: true},
-                                ]
+
+                                    {text: 'Wrong, too bad.', id: "1"},
+                                    {text: 'Wrong, too bad.', id: "2"},
+                                    {text: 'Wrong, too bad.', id: "3"},
+                                    {text: 'Right', id: "4"}
+                                ],
+                                answer: 2
+
+
                             },
+
                             {
                                 text: "Question 2",
                                 responses: [
-                                    {text: 'Right answer', correct: true},
-                                    {text: 'Wrong answer', correct: false},
-                                ]
+
+                                    {text: 'Wrong, too bad.', id: "1"},
+                                    {text: 'Right', id: "2"},
+                                    {text: 'Wrong, too bad.', id: "3"},
+                                    {text: 'Wrong, too bad.', id: "4"}
+                                ],
+                                answer: 1
+
+
                             }
+
+
+
                         ]
                     };
 
@@ -115,7 +133,9 @@
             },
             // Return "true" count in userResponses
             score: function() {
-                return this.userResponses.filter(function(val) { return val }).length;
+                return this.userResponses.filter(function(val) {
+                    return val
+                }).length;
             }
 
         }
