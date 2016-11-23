@@ -13,10 +13,7 @@
                     <ol>
                         <li v-for="response in question.responses">
 
-                            <!--&lt;!&ndash; The radio button has three new directives &ndash;&gt;-->
-                            <!--&lt;!&ndash; v-bind:value sets "value" to "true" if the response is correct &ndash;&gt;-->
-                            <!--&lt;!&ndash; v-bind:name sets "name" to question index to group answers by question &ndash;&gt;-->
-                            <!--&lt;!&ndash; v-model creates binding with userResponses &ndash;&gt;-->
+
 
                             <label class="mu-radio">
 
