@@ -1,140 +1,96 @@
-function Question(text, choices, answer){
-    this.text = text;
-    this.choices= choices;
-    this.answer=  answer;
-}
+var vm = new Vue({
+    el: '#questions',
+    data: {
+        title: 'Oklahoma Nightlife Quiz',
+        tagline: 'Take the quiz to see how much you know about OK nightlife',
+        score: 0,
+        questionsAnswered: 0,
+        questions: [
+            {
+                id: 1,
+                text: 'What is Oklahoma\'s oldest bar?',
+                options: [
+                    {text: 'Grandad\'s Bar', mark: false},
+                    {text: 'Eischen\'s Bar', mark: false},
+                    {text: 'Enso Bar', mark: false},
+                    {text: 'Max Retro Pub', mark: false}
+                ],
+                correctOptionByIndex: 1,
+                correctResponse: {
+                    text: 'You\'re right! Eischen Bar was established back in 1896 and is currently a smokefree establishment. For a vintage feeling in an updated venue, check out the speakeasy style <a href="http://www.apothecary39.com/">Apothecary 39</a> in OKC.',
+                    hide: true
+                },
+                incorrectResponse: {
+                    text: 'That\'s actually incorrect. The correct answer is Eischen Bar. They were established back in 1896 and  are currently a smokefree establishment. For a vintage feeling in an updated venue, check out the speakeasy style <a href="http://www.apothecary39.com/">Apothecary 39</a> in OKC.',
+                    hide: true
+                },
+                answered: false
+            },
+            {
+                id: 2,
+                text: 'What are the benefits of going out to a smokefree establishment?',
+                options: [
+                    {text: 'You can enjoy the taste of your food and drinks.', mark: false},
+                    {text: 'You can breathe easily.', mark: false},
+                    {text: 'You\'ll leave the bar smelling as great as when you came in.', mark: false},
+                    {text: 'All of the above.', mark: false}
+                ],
+                correctOptionByIndex: 3,
+                correctResponse: {
+                    text: 'You are most definitely correct - visiting smokefree establishments will certainly enhance your night. <a href="http://ensobar.com/">Enso Bar</a> in Tulsa has cheese, meat, and olive trays to pair with amazing drinks! And since they are smokefree, you won\'t have to sacrifice taste.',
+                    hide: true
+                },
+                incorrectResponse: {
+                    text: 'Close, but wrong. The correct answer is, "All of the above" - more reasons to always choose tobacco-free establishments, such as <a href="http://ensobar.com/">Enso Bar</a> in Tulsa. They have cheese, meat, and olive trays to pair with amazing drinks! And since they are smokefree, you won\'t have to sacrifice taste.',
+                    hide: true
+                },
+                answered: false
+            },
+        ]
 
-Question.prototype.correctAnswer = function(choice){
-    return choice === this.answer;
-}
+    },
+    methods: {
+        checkAnswer: function(option) {
+            // Check if the question has already been answered
+            if (!option.$parent.answered) {
+                // Find out which option is the correct answer to this question
+                var correct = option.$parent.correctOptionByIndex;
+                // Set the property of the correct option's mark attribute to true
+                option.$parent.options[correct].mark = true;
+                // Check if what we clicked the wrong answer
+                if (!option.mark) {
+                    // Grab the element that was clicked
+                    var el = option.$el;
+                    // Add the incorrect class
+                    $(el).addClass("incorrect");
+                    // Show the incorrect response
+                    option.$parent.incorrectResponse.hide = false;
+                } else {
+                    // The answer they selected was correct, so add to the user's quiz score
+                    this.score += 1;
+                    // Show the correct response
+                    option.$parent.correctResponse.hide = false;
+                }
+                // Mark that the question has now been answered, so clicks won't do anything anymore
+                option.$parent.answered = true;
+                this.questionsAnswered += 1;
+            }
+
+            // Check if its the last question that was just answered
+            if (this.questionsAnswered == this.countQuestions()) {
+                // Get the score as a percentage
+                var score = this.score / this.countQuestions();
 
 
+            }
+        },
 
 
-
-
-
-var alabama = new Question('Alabama', ['Montgomery', 'Mobile', 'Birmingham', 'Tuscaloosa'], 'Montgomery');
-
-var florida = new Question('Florida', ['Orlando', 'Miami', 'Tampa', 'Tallahassee'], 'Tallahassee');
-
-var georgia = new Question('Georgia', ['Macon', 'Atlanta', 'Savannah', 'Bainbridge'], 'Atlanta');
-
-var northCarolina = new Question('North Carolina', ['Wake Forest', 'Salem', 'Raleigh', 'Charlotte'], 'Raleigh');
-
-var california = new Question('California', ['Los Angeles', 'Sacramento', 'San Francisco', 'San Diego'], 'Sacramento');
-
-var questions = [alabama, florida, georgia, northCarolina, california];
-
-$(document).ready(function() {
-
-    // on pageload do intro();
-    doIntro();
-
-    var arrPosition = 0;
-    var score = 0;
-    var progress = 0;
-    var questionCount = 1;
-
-    loadQuestion(arrPosition);
-
-    // user selects an answer and it becomes selected
-    $('.list').on('click', 'li', function () {
-        // but first we have to make sure all other selecteds are clear
-        $('.list').find('li').removeClass('selected');
-        $(this).addClass('selected');
-        $('.checkout h1').hide();
-        $('.checkout button').show();
-    });
-
-    $('.checkout').on('click', 'button', function() {
-        score = checkAnswer(arrPosition, score, questionCount);
-        progress += 20;
-        questionCount += 1;
-        updateProgress(score, progress, questionCount);
-        if (arrPosition < 4) {
-            $('.checkout button').hide();
-            $('.checkout h1').show();
-            $('.list').find('li').removeClass('selected');
-            arrPosition+=1;
-            loadQuestion(arrPosition);
-        } else {
-            console.log("done");
-            $('#question-count').text('5');
-            // clear quiz section out
-            $('.checkout').hide();
-            $('.heading h2').hide();
-            $('.options').hide();
-            $('.answers').show();
-            $('.reset').show();
-            // and give score
-            console.log(score);
-            $('.heading h1').text("You scored " + score + "%");
-            $('.list').find('li').removeClass('selected');
-            // give link to start over
+        getScore: function() {
+            return this.score;
+        },
+        countQuestions: function() {
+            return this.questions.length;
         }
-    });
-
-    $('.reset').on('click', function() {
-        location.reload(true);
-    });
-
-
-
-});
-
-function doIntro() {
-    $('.step-1').fadeIn(1500, function() {
-        $(this).fadeOut(1500, function() {
-            $('.step-2').fadeIn(1500, function() {
-                $(this).fadeOut(1500, function() {
-                    $('.main').fadeIn(2500);
-                });
-            });
-        });
-    });
-}
-
-function loadQuestion(arrPosition) {
-    // then user will be presented with a question
-    $("#capital").text(questions[arrPosition].state);
-
-    // cities show
-    for (var i = 0; i < 4; i++) {
-        var listItem = 'list-item-' + (i+1);
-        $('.'+listItem+' .item').text(questions[arrPosition].cities[i]);
-        console.log(i);
-        console.log(questions[arrPosition]);
-        console.log(questions[arrPosition].cities[i]);
     }
-
-}
-
-function checkAnswer(arrPosition, score, questionCount) {
-    var answer = $('.list').find('li.selected .item').text();
-    console.log("Answer: " + answer);
-    var capital = questions[arrPosition].capital;
-    console.log("Capital: " + capital);
-    if (answer === capital) {
-        $('#update h1').text('Correct!');
-        score += 20;
-        console.log('score: ' + score);
-        $('.answers .list-item-' + questionCount + ' .answer').text(answer + ' is the capital of ' + questions[arrPosition].state);
-        $('.answers .list-item-' + questionCount).addClass('correct');
-    } else {
-        $('#update h1').text('Wrong!');
-        console.log('score: ' + score);
-        $('.answers .list-item-' + questionCount + ' .answer').text(answer + ' is not the capital of ' + questions[arrPosition].state);
-        $('.answers .list-item-' + questionCount).addClass('wrong');
-    }
-    return score;
-}
-
-function updateProgress(score, progress, questionCount) {
-    $('#question-count').text(questionCount);
-    $("#top-progress").attr("aria-valuenow", progress);
-    $("#top-progress").attr("style", "width: "+progress+"%;");
-    $('#score').text(score);
-    $('#score-bar').attr('aria-valuenow', score);
-    $('#score-bar').attr('style', 'width: '+score+'%;')
-};
+})
