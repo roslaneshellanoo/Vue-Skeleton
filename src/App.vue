@@ -7,6 +7,9 @@
         </router-link>
         <router-link to="/javascript">Go to javascript</router-link>
         <router-link to="/vuejs">Go to Vue.js</router-link>
+        <router-link to="/quiz">Quiz</router-link>
+
+
         <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank">
           Built with Vue.js
         </a>
@@ -61,7 +64,7 @@
 
   /* core.css v1.1 | MIT License | corecss.io */
   html {
-    font-family: sans-serif;
+    font-family: Roboto,sans-serif;
     font-size: 100%;
     line-height: 1;
     -ms-text-size-adjust: 100%;
@@ -114,42 +117,8 @@
     content: '';
     content: none;
   }
-  [type='color'],
-  [type='date'],
-  [type='datetime-local'],
-  [type='email'],
-  [type='month'],
-  [type='number'],
-  [type='password'],
-  [type='search'],
-  [type='tel'],
-  [type='text'],
-  [type='time'],
-  [type='url'],
-  [type='week'],
-  textarea {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    border: 1px solid #000;
-    border-radius: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-  }
-  ::-webkit-input-placeholder {color: #777;}
-  :-moz-placeholder {color: #777;}
-  ::-moz-placeholder {color: #777; opacity: 1;}
-  :-ms-input-placeholder {color: #777;}
-  [type='reset'],
-  [type='submit'],
-  [type='button'],
-  button {
-    border: 1px solid #000;
-    border-radius: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    cursor: pointer;
-  }
+
+
   :focus {
     outline: none;
   }

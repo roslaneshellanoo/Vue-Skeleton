@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.15.2",
+    "keen-ui": "^0.8.9",
+    "muse-ui": "^2.0.0-alpha.8",
     "vue": "^2.0.1",
     "vue-axios": "^1.2.2"
   },
