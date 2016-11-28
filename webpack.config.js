@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -21,6 +22,11 @@ module.exports = {
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'},
+
+      {
+        test: /\.scss$/,
+        loaders: ["style-loader", "css-loader", "sass-loader"]
+      },
 
       {
         test: /\.js$/,

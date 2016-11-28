@@ -1,5 +1,5 @@
 <template>
-  <div id="app"  v-md-theme="'default'">
+  <div id="app" >
 
 
 
@@ -15,7 +15,7 @@
                 <router-link to="/javascript">Go to javascript</router-link>
                 <router-link to="/vuejs">Go to Vue.js</router-link>
                 <router-link to="/quiz">Quiz</router-link>
-                <mu-icon-button icon='expand_more' slot="right"/>
+                <mu-icon-button icon='expand_more' slot="right" />
             </mu-appbar>
         </div>
 
@@ -71,6 +71,8 @@
 </script>
 
 <style lang="sass">
+
+
 
   /* core.css v1.1 | MIT License | corecss.io */
   html {
@@ -235,9 +237,9 @@
     margin: 0;
     padding-top: 55px
   }
-  a {
-    text-decoration: none
-  }
+
+
+
 
   #app {
     padding: 2rem 0;
