@@ -57,6 +57,9 @@
                 <p>
                     Total score: {{ score() }} / {{ quiz.questions.length }}
                 </p>
+                <mu-raised-button v-on:click="refresh" label="Reload Quiz" class="demo-raised-button"
+                                  primary/>
+
             </div>
         </div>
     </div>
@@ -64,7 +67,7 @@
 
 
 <script>
-
+    //import AppNavDrawer from 'Navigation/AppNavDrawer'
     export default {
 
 
@@ -125,8 +128,11 @@
 
         methods: {
 
-            // Find out which option is the correct answer to this question
+            refresh: function () {
+                location.reload();
+            },
 
+            // Find out which option is the correct answer to this question
 
             // Go to next question
             next: function () {
@@ -140,12 +146,13 @@
             // Return "true" count in userResponses
             score: function () {
                 var right_answers = 0;
-                var t = this.quiz;
-                console.log(t)
+                var quizObj = this.quiz;
+                console.log(quizObj)
                 this.userResponses.forEach(function (value, index) {
-                    console.dir(t.questions[index].answer);
-                    if (t.questions[index].answer == value) {
+                    console.dir(quizObj.questions[index].answer);
+                    if (quizObj.questions[index].answer == value) {
                         right_answers++;
+                        console.info(right_answers);
 
                     }
 

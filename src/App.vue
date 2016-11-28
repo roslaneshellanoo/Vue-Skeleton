@@ -1,28 +1,32 @@
 <template>
   <div id="app"  v-md-theme="'default'">
-    <div class="header">
-      <div class="inner">
-        <router-link to="/" exact>
-          <img class="logo" src="./assets/logo.png" alt="logo">
-        </router-link>
-        <router-link to="/javascript">Go to javascript</router-link>
-        <router-link to="/vuejs">Go to Vue.js</router-link>
-        <router-link to="/quiz">Quiz</router-link>
 
 
-        <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank">
-          Built with Vue.js
-        </a>
 
-      </div>
+      <app-nav/>
+
+    <div class="wrapper">
+        <div class="header">
+            <mu-appbar title="Home">
+                <mu-icon-button icon='menu' slot="left"/>
+                <router-link to="/" exact>
+                    Home
+                </router-link>
+                <router-link to="/javascript">Go to javascript</router-link>
+                <router-link to="/vuejs">Go to Vue.js</router-link>
+                <router-link to="/quiz">Quiz</router-link>
+                <mu-icon-button icon='expand_more' slot="right"/>
+            </mu-appbar>
+        </div>
+
+
+        <div class="container">
+            <transition name="fade" mode="out-in">
+                <router-view></router-view>
+            </transition>
+        </div>
     </div>
 
-
-    <div class="container">
-      <transition name="fade" mode="out-in">
-        <router-view></router-view>
-      </transition>
-    </div>
 
   </div>
 </template>
@@ -31,9 +35,15 @@
   import Home from './pages/Home.vue'
   import Javascript from './pages/Javascript.vue'
   import Vuejs from './pages/Vuejs.vue'
+  import AppNavDrawer from './Navigation/AppNavDrawer.vue'
+
 
   export default {
     name: 'app',
+
+    components: {
+      'app-nav': AppNavDrawer
+    },
     data() {
       return {
         posts: []
@@ -229,7 +239,7 @@
     text-decoration: none
   }
 
-  div#app {
+  #app {
     padding: 2rem 0;
   }
 
@@ -245,10 +255,7 @@
     top: 0;
     left: 0;
     right: 0;
-      
-      a{
-        color: #fff!important;
-      }
+
   }
 
   .header .inner {
@@ -259,12 +266,13 @@
   }
 
   .header a {
-    color: hsla(0,0%,100%,.8);
+      color: #fff!important;
     line-height: 24px;
     transition: color .15s ease;
     display: inline-block;
     vertical-align: middle;
-    font-weight: 300;
+    font-size: 16px;
+    font-weight: 400;
     letter-spacing: .075em;
     margin-right: 1.8em
   }
@@ -275,7 +283,7 @@
 
   .header a.router-link-active {
     color: #fff;
-    font-weight: 400
+    font-weight: 700
   }
 
   .header a:nth-child(6) {
@@ -360,5 +368,5 @@
     float: left;
   }
 
-  
+
 </style>
