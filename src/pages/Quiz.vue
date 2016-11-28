@@ -2,14 +2,16 @@
     <div class="quiz">
         <div class="container">
 
-            <h2 class="md-display-2">Javascript Quiz</h2>
+            <h1 class="text-center">Javascript Quiz</h1>
 
             <!-- index is used to check with current question index -->
 
             <div v-for="(question, index) in quiz.questions">
                 <!-- Hide all questions, show only the one with index === to current question index -->
                 <div v-show="index === questionIndex">
-                    <h2>{{ question.text }}</h2>
+                    <h3>{{ question.text }}</h3>
+                    <mu-divider />
+                    <br>
                     <ol>
                         <li v-for="response in question.responses">
 
@@ -41,6 +43,7 @@
 
                         </li>
                     </ol>
+                    <br>
                     <!-- The two navigation buttons -->
                     <!-- Note: prev is hidden on first question -->
                     <mu-raised-button v-if="questionIndex > 0" v-on:click="prev" label="Prev"
@@ -78,7 +81,7 @@
                 title: 'My quiz',
                 questions: [
                     {
-                        text: "Question 1",
+                        text: "Question 1 ???",
                         responses: [
 
                             {text: 'Wrong, too bad.', id: 1},
