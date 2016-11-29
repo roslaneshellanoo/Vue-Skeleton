@@ -8,7 +8,7 @@
 
                 <div class="">
                     <h1 class="text-center">Simple ToDo made with Vue.js</h1>
-                    <mu-divider />
+                    <mu-divider/>
                     <mu-content-block>
                         <div class="v-for-complex">
                             <div id="myvueinstance" class="container">
@@ -17,23 +17,45 @@
                                 <mu-list :value="value" @change="handleChange">
 
 
-                                    <mu-list-item v-for="library in libraries" :value="library">
+                                    <mu-list-item v-for="library in libraries"
+                                                  :title="library.text"
+                                                  :value="library"
+                                                  v-bind:class="[{ active: library.isActive }]"
+                                    >
 
-                                        {{ library }}
-                                        <mu-avatar icon="folder" slot="leftAvatar"/>
+
+
+                                        <mu-checkbox class="demo-checkbox"
+                                                     v-model="library.isActive"
+                                                     slot="left"
+                                                     uncheckIcon="visibility"
+                                                     checkedIcon="visibility_off"
+                                        />
+
+
+                                        <!--<mu-icon value="call" color="indigo" slot="left"/>-->
+
+
+
                                         <mu-icon v-on:click="removeLibrary(library)"
                                                  value="remove_circle"
                                                  slot="right"
                                                  color="red700"
+
+
                                         />
 
+
+
                                     </mu-list-item>
+
 
 
                                 </mu-list>
 
 
                                 <br/>
+
                                 <div @keyup.enter="addLibrary">
                                     <mu-text-field v-model="newlibrary"
                                                    label="Add to library"
@@ -43,31 +65,37 @@
                                 </div>
 
 
-                                <mu-raised-button v-on:click="addLibrary" label="Click to add library"
-                                                  class="demo-raised-button" backgroundColor="blue500"/>
+                                <mu-raised-button v-on:click="addLibrary"
+                                                  label="Click to add library"
+                                                  class="demo-raised-button spacing-bottom"
+                                                  backgroundColor="blue500"/>
 
 
                                 <mu-raised-button v-on:click="deleteLastLibrary"
                                                   label="Click to delete last library"
-                                                  class="demo-raised-button"
+                                                  class="demo-raised-button spacing-bottom"
                                                   backgroundColor="deepOrange700"/>
 
 
                                 <mu-raised-button v-on:click="deleteLibraries"
                                                   label="Click to delete all libraries"
-                                                  class="demo-raised-button"
+                                                  class="demo-raised-button spacing-bottom"
                                                   backgroundColor="pink800"/>
 
                                 <p></p>
 
-                                <div class="row">Vue Instance data object</div>
-                                {{ newlibrary }}
+                                <div class="row">
+                                    <pre>
+                                         {{ $data }}
+                                    </pre>
+
+                                </div>
+
                             </div>
 
                         </div>
                     </mu-content-block>
                 </div>
-
 
 
                 <!---------------------------------------------->
@@ -87,10 +115,13 @@
 
         data() {
             return {
-                message: "hello vue!",
-                libraries: ['angular.js', 'd3', 'node', 'jquery'],
+
+                libraries: [],
                 newlibrary: '',
-                value: 1
+                value: 1,
+                activeClass: 'active',
+
+                isActive: false
             }
 
         },
@@ -101,11 +132,18 @@
             },
             addLibrary: function () {
 
-                if (this.newlibrary.length > 0) {
+                //trim() is used to remove whitespace from both ends of a string
+                var task = this.newlibrary.trim();
+                //if task is not an empty string
+                if (task) {
+                    //Push an object containing the task to the taskList array
+                    this.libraries.push({
+                        text: task,
+                        isActive: false
+                    });
+                    //Reset newTask to an empty string so the input field is cleared
+                    this.newlibrary = "";
 
-                    this.libraries.push(this.newlibrary);
-
-                    this.newlibrary = '';
                 }
             },
 
@@ -117,10 +155,21 @@
                 this.libraries.pop();
             },
 
-            removeLibrary: function(library){
+            removeLibrary: function (library) {
                 this.libraries.splice(this.libraries.indexOf(library), 1)
-                console.dir(this.libraries.indexOf(library))
+            },
+
+            markLibrary: function () {
+                //this.libraries.classList.toggle('aaaaaaaaaa');
+                this.isActive = !this.isActive;
             }
         }
     }
 </script>
+
+
+<style lang="sass">
+    .mu-list .active {
+        text-decoration: line-through;
+    }
+</style>
