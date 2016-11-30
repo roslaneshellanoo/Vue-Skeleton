@@ -117,3 +117,99 @@ small { font-size: 75%; }
   height: 100%;
   border: 0;
 }
+
+
+/*
+
+Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-license.org/
+
+*/
+
+.hljs,
+pre{
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #23241f;
+  font-family: menlo;
+}
+
+.hljs,
+.hljs-tag,
+.hljs-subst,
+code .p{
+  color: #f8f8f2;
+}
+
+.hljs-strong,
+.hljs-emphasis {
+  color: #a8a8a2;
+}
+
+.hljs-bullet,
+.hljs-quote,
+.hljs-number,
+.hljs-regexp,
+.hljs-literal,
+.hljs-link,
+code .v{
+  color: #ae81ff;
+}
+
+.hljs-code,
+.hljs-title,
+.hljs-section,
+.hljs-selector-class,
+code .f{
+  color: #27d06d;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-name,
+.hljs-attr,
+code .k
+{
+  color: #F92672;
+}
+
+.hljs-symbol,
+.hljs-attribute,
+code{
+  color: #66d9ef;
+}
+
+.hljs-params,
+.hljs-class .hljs-title {
+  color: #f8f8f2;
+}
+
+.hljs-string,
+.hljs-type,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-selector-id,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-variable,
+code .s
+{
+  color: #faff67;
+}
+
+.hljs-comment,
+.hljs-deletion,
+.hljs-meta,
+code .c{
+  color: #75715e;
+}

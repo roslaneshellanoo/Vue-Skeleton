@@ -2,7 +2,11 @@
     <div class="home">
 
         <div class="container">
-
+        <pre><code data-language="python">def openFile(path):
+    file = open(path, "r")
+    content = file.read()
+    file.close()
+    return content</code></pre>
 
             <div class="col-xs-12">
 
@@ -85,8 +89,43 @@
                                 <p></p>
 
                                 <div class="row">
+
                                     <pre>
-                                         {{ $data }}
+                                        <code>
+import Vue from 'vue'
+import VueResource from 'vue-resource'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import router from './router'
+import App from './App.vue'
+import MuseUI from 'muse-ui'
+import 'muse-ui/dist/muse-ui.css'
+import './style.scss'
+
+
+
+
+Vue.use(MuseUI)
+Vue.use(VueResource)
+Vue.use(VueAxios, axios)
+
+
+
+const app = new Vue({
+      el: '#app',
+      components: {
+            // all components already registered
+      },
+
+      router,
+      render: h => h(App)
+})
+
+
+
+
+
+                                        </code>
                                     </pre>
 
                                 </div>
@@ -109,11 +148,14 @@
 
 <script>
 
-    import {reverse, filterBy, findBy} from '../filters/filters'
+
     export default {
         name: 'home',
 
         data() {
+
+
+
             return {
 
                 libraries: [],
@@ -127,6 +169,8 @@
         },
 
         methods: {
+
+
             handleChange (val) {
                 this.value = val
             },
@@ -163,6 +207,16 @@
                 //this.libraries.classList.toggle('aaaaaaaaaa');
                 this.isActive = !this.isActive;
             }
+        },
+
+        mounted: function () {
+            this.$nextTick(function () {
+
+                Array.from(document.querySelectorAll('pre code'))
+                    .forEach((code) => {
+                        code.innerHTML = h(code.textContent)
+                    });
+            })
         }
     }
 </script>

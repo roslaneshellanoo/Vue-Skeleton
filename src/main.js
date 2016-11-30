@@ -10,6 +10,7 @@ import './style.scss'
 
 
 
+
 Vue.use(MuseUI)
 Vue.use(VueResource)
 Vue.use(VueAxios, axios)
@@ -21,6 +22,9 @@ const app = new Vue({
       components: {
             // all components already registered
       },
+
       router,
       render: h => h(App)
 })
+
+
