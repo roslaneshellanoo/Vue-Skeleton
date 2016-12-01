@@ -6,10 +6,9 @@
 
 
 
-    <div class="loader" v-show="loading">
-      <mu-circular-progress :size="60" :strokeWidth="5"/>
-
-    </div>
+    <h1 class="loader" v-show="loading">
+      LOADING...
+    </h1>
 
 
     <mu-row gutter>
