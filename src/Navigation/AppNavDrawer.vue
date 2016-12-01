@@ -1,13 +1,34 @@
 <template>
-<div>
-    <h4>drawer</h4>
-</div>
+    <mu-drawer  @close="handleClose" :open="open" :docked="docked"
+               class="app-drawer" :zDepth="1">
+        <mu-list @itemClick="docked ? '' : toggle()">
+            <mu-list-item title="Menu Item 1"/>
+            <mu-list-item title="Menu Item 2"/>
+            <mu-list-item title="Menu Item 3"/>
+            <mu-list-item v-if="docked" @click.native="open = false" title="Close"/>
+        </mu-list>
+    </mu-drawer>
 </template>
 
 
 <script>
-export default {
+    export default {
+        props: {
+            open: {
+                type: Boolean,
+                default: true
+            },
+            docked: {
+                type: Boolean,
+                default: true
+            }
+        },
 
+        methods: {
+            handleClose () {
+                this.$emit('close')
+            }
+        }
     }
 </script>
 

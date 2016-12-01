@@ -9,10 +9,15 @@
             <div v-for="(question, index) in quiz.questions">
                 <!-- Hide all questions, show only the one with index === to current question index -->
                 <div v-show="index === questionIndex">
-                    <h3>{{ question.text }}</h3>
+                    <br>
+
+                    <div v-html="question.text">
+
+                    </div>
+
                     <mu-divider />
                     <br>
-                    <ol>
+                    <ul class="list-reset">
                         <li v-for="response in question.responses">
 
 
@@ -35,14 +40,14 @@
                                         <i aria-hidden="true"
                                            class="mu-icon material-icons mu-radio-icon-checked radio_button_checked">radio_button_checked</i>
                                     </div>
-                                    <div class="mu-radio-label">{{response.text}}</div>
+                                    <div class="mu-radio-label" v-html="response.text"></div>
                                 </div>
                                 <!---->
                             </label>
 
 
                         </li>
-                    </ol>
+                    </ul>
                     <br>
                     <!-- The two navigation buttons -->
                     <!-- Note: prev is hidden on first question -->
@@ -77,17 +82,28 @@
         name: 'quiz',
         data() {
 
+
+let q1 =
+
+    "<pre><code>(function(x, f = () => x) { " +
+    "var x; var y = x; x = 2; " +
+    "return [x, y, f()]; " +
+    "})(1)</code></pre>";
+
+
+
             var quiz = {
                 title: 'My quiz',
                 questions: [
                     {
-                        text: "Question 1 ???",
+                        text: q1,
                         responses: [
 
                             {text: 'Wrong, too bad.', id: 1},
                             {text: 'Wrong, too bad.', id: 2},
                             {text: 'Wrong, too bad.', id: 3},
-                            {text: 'Right1', id: 4}
+                            {text:
+                                '<pre><code>document.getElementById("demo").innerHTML = "Hello World!";</code></pre>', id: 4}
                         ],
                         answer: 4
 
@@ -172,9 +188,32 @@
 //                }).length;
 
 
-            }
+            },
 
 
+
+
+        },
+
+
+        mounted: function () {
+            this.$nextTick(function () {
+
+                Array.from(document.querySelectorAll('pre code'))
+                    .forEach((code) => {
+                        code.innerHTML = h(code.textContent)
+                    });
+            })
+        },
+
+        updated: function () {
+            this.$nextTick(function () {
+
+                Array.from(document.querySelectorAll('pre code'))
+                    .forEach((code) => {
+                        code.innerHTML = h(code.textContent)
+                    });
+            })
         }
     }
 </script>

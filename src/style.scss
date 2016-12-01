@@ -81,6 +81,11 @@ small { font-size: 75%; }
   overflow: hidden;
 }
 
+.list-reset {
+  list-style-type: none;
+  padding: 0;
+}
+
 .invisible {
   visibility: hidden !important;
 }
