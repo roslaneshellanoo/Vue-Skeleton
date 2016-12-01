@@ -1,6 +1,12 @@
 <template>
-    <mu-drawer  @close="handleClose" :open="open" :docked="docked"
-               class="app-drawer" :zDepth="1">
+    <mu-drawer @close="handleClose" :open="open" :docked="docked" class="app-drawer" :zDepth="1">
+
+        <mu-appbar class="exmaples-nav-appbar" :zDepth="0">
+            <a class="exmaples-appbar-title" @click="handleMenuChange('#/index')" href="#/index"
+               style="display:inline-block; color: #fff;">JS Quiz App</a>
+            <mu-badge content="alpha" class="exmaples-version" secondary/>
+        </mu-appbar>
+        <mu-divider/>
         <mu-list @itemClick="docked ? '' : toggle()">
             <mu-list-item title="Menu Item 1"/>
             <mu-list-item title="Menu Item 2"/>

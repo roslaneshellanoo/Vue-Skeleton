@@ -2,27 +2,18 @@
     <div id="app">
 
 
-        <app-nav @close="toggleNav" :open="open" :docked="docked"/>
+        <sidebar-nav @close="toggleNav" :open="open" :docked="docked"/>
 
-        <div class="wrapper">
-            <div class="header">
-                <mu-appbar title="Home">
+        <mu-appbar title="Home" class="header-nav-bar"  :class="{'nav-hide': !open}">
+            <mu-icon-button @click="toggleNav" icon='menu' slot="left"/>
+            <router-link to="/" exact>Home</router-link>
+            <router-link to="/javascript">Go to javascript</router-link>
+            <router-link to="/vuejs">Go to Vue.js</router-link>
+            <router-link to="/quiz">Quiz</router-link>
+            <mu-icon-button icon='expand_more' slot="right"/>
+        </mu-appbar>
 
-
-                    <mu-icon-button @click="toggleNav" icon='menu' slot="left"/>
-
-
-                    <router-link to="/" exact>
-                        Home
-                    </router-link>
-                    <router-link to="/javascript">Go to javascript</router-link>
-                    <router-link to="/vuejs">Go to Vue.js</router-link>
-                    <router-link to="/quiz">Quiz</router-link>
-                    <mu-icon-button icon='expand_more' slot="right"/>
-                </mu-appbar>
-            </div>
-
-
+        <div class="wrapper" :class="{'nav-hide': !open}">
             <div class="container">
                 <transition name="fade" mode="out-in">
                     <router-view></router-view>
@@ -45,32 +36,20 @@
         name: 'app',
 
         components: {
-            'app-nav': AppNavDrawer
+            'sidebar-nav': AppNavDrawer
         },
         data() {
             return {
-                posts: [],
                 open: true,
                 docked: true
             };
         },
 
         created: function () {
-            this.fetchPosts();
+
         },
 
         methods: {
-            fetchPosts: function () {
-
-                this.$http.get('http://ip-api.com/json').then((response) => {
-                    this.posts = response.data;
-
-                }, (errorResponse) => {
-                    // Handle error...
-                    console.log('API responded with:', errorResponse.status);
-                });
-
-            },
 
             toggleNav () {
                 this.open = !this.open
@@ -116,24 +95,30 @@
         padding: 0 1rem;
     }
 
-    .header {
+    .wrapper {
+        padding-left: 256px;
+        transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .wrapper.nav-hide {
+        padding-left: 0;
+    }
+
+    .header-nav-bar {
         background-color: #167a8b;
         position: fixed;
         z-index: 999;
         top: 0;
+        left: 256px;
+        transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .header-nav-bar.nav-hide {
         left: 0;
-        right: 0;
-
     }
 
-    .header .inner {
-        max-width: 100%;
-        box-sizing: border-box;
-        margin: 0 auto;
-        padding: 15px 5px
-    }
 
-    .header a {
+    .header-nav-bar a {
         color: #fff !important;
         line-height: 24px;
         transition: color .15s ease;
@@ -145,20 +130,20 @@
         margin-right: 1.8em
     }
 
-    .header a:hover {
+    .header-nav-bar a:hover {
         color: #fff
     }
 
-    .header a.router-link-active {
+    .header-nav-bar a.router-link-active {
         color: #fff;
         font-weight: 700
     }
 
-    .header a:nth-child(6) {
+    .header-nav-bar a:nth-child(6) {
         margin-right: 0
     }
 
-    .header .github {
+    .header-nav-bar .github {
         color: #fff;
         font-size: .9em;
         margin: 0;
@@ -186,26 +171,20 @@
         opacity: 0
     }
 
-    @media (max-width: 860px) {
-        .header .inner {
-            padding: 15px 30px
-        }
-    }
+
 
     @media (max-width: 600px) {
         body {
             font-size: 14px
         }
 
-        .header .inner {
-            padding: 15px
-        }
 
-        .header a {
+
+        .header-nav-bar a {
             margin-right: 1em
         }
 
-        .header .github {
+        .header-nav-bar .github {
             display: none
         }
     }

@@ -22,7 +22,7 @@
 
 
 
-                            <label class="mu-radio">
+                            <label class="mu-radio spacing-bottom">
 
 
                                 <input type="radio"
