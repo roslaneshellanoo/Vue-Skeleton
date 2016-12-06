@@ -2,11 +2,6 @@
     <div class="home">
 
         <div class="container">
-        <pre><code data-language="python">def openFile(path):
-    file = open(path, "r")
-    content = file.read()
-    file.close()
-    return content</code></pre>
 
             <div class="col-xs-12">
 

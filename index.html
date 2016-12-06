@@ -8,12 +8,112 @@
           <!--href="node_modules/bootstrap-material-design/bower_components/bootstrap/dist/css/bootstrap.min.css">-->
     <!--<link rel="stylesheet"-->
           <!--href="node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css">-->
+      <style type="text/css">
+          /*
+Spinner
+ */
+
+          @-webkit-keyframes rotate-forever {
+              0% {
+                  -webkit-transform: rotate(0deg);
+                  -moz-transform: rotate(0deg);
+                  -ms-transform: rotate(0deg);
+                  -o-transform: rotate(0deg);
+                  transform: rotate(0deg);
+              }
+              100% {
+                  -webkit-transform: rotate(360deg);
+                  -moz-transform: rotate(360deg);
+                  -ms-transform: rotate(360deg);
+                  -o-transform: rotate(360deg);
+                  transform: rotate(360deg);
+              }
+          }
+
+          @-moz-keyframes rotate-forever {
+              0% {
+                  -webkit-transform: rotate(0deg);
+                  -moz-transform: rotate(0deg);
+                  -ms-transform: rotate(0deg);
+                  -o-transform: rotate(0deg);
+                  transform: rotate(0deg);
+              }
+              100% {
+                  -webkit-transform: rotate(360deg);
+                  -moz-transform: rotate(360deg);
+                  -ms-transform: rotate(360deg);
+                  -o-transform: rotate(360deg);
+                  transform: rotate(360deg);
+              }
+          }
+
+          @keyframes rotate-forever {
+              0% {
+                  -webkit-transform: rotate(0deg);
+                  -moz-transform: rotate(0deg);
+                  -ms-transform: rotate(0deg);
+                  -o-transform: rotate(0deg);
+                  transform: rotate(0deg);
+              }
+              100% {
+                  -webkit-transform: rotate(360deg);
+                  -moz-transform: rotate(360deg);
+                  -ms-transform: rotate(360deg);
+                  -o-transform: rotate(360deg);
+                  transform: rotate(360deg);
+              }
+          }
+
+          .loading-spinner {
+              -webkit-animation-duration: 0.75s;
+              -moz-animation-duration: 0.75s;
+              animation-duration: 0.75s;
+              -webkit-animation-iteration-count: infinite;
+              -moz-animation-iteration-count: infinite;
+              animation-iteration-count: infinite;
+              -webkit-animation-name: rotate-forever;
+              -moz-animation-name: rotate-forever;
+              animation-name: rotate-forever;
+              -webkit-animation-timing-function: linear;
+              -moz-animation-timing-function: linear;
+              animation-timing-function: linear;
+              height: 30px;
+              width: 30px;
+              border: 8px solid #ffffff;
+              border-right-color: transparent;
+              border-radius: 50%;
+              display: inline-block;
+          }
+
+          .wrap-spinner {
+              background: #171717;
+              position: fixed;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+          }
+
+          .loading-spinner {
+              position: absolute;
+              top: 50%;
+              right: 0;
+              bottom: 0;
+              left: 50%;
+              margin: -15px 0 -15px;
+          }
+
+      </style>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+        <div class="wrap-spinner">
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
 
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>-->
     <script type="text/javascript" charset="utf-8">

@@ -1,15 +1,9 @@
 <template>
 
 <section class="vuejs">
+
   <div class="container">
     <h1>Vue.js Guide</h1>
-
-
-
-    <h1 class="loader" v-show="loading">
-      LOADING...
-    </h1>
-
 
     <mu-row gutter>
       <mu-col class="spacing-bottom" v-for="post in posts" width="50" tablet="30" desktop="33">
@@ -50,7 +44,10 @@
   export default {
     name: 'vuejs',
     data() {
+
+
       return {
+
         posts: []
       };
     },
@@ -71,12 +68,32 @@
 
         }, (errorResponse) => {
 
-
           // Handle error...
           console.log('API responded with:', errorResponse.status);
         });
 
       }
     }
+
+
   }
 </script>
+
+
+<style type="text/css">
+  .preloading {
+    /* display: flex; */
+    position: fixed;
+    background: black;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    transition: all 1200ms ease;
+    color: #fff;
+    text-align: center;
+  }
+</style>
