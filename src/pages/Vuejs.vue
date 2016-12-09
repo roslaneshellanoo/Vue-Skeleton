@@ -1,12 +1,17 @@
 <template>
 
 <section class="vuejs">
-
+  <div v-for="(value, key, index) in object">
+    {{ index }}. {{ key }} : {{ value }}
+  </div>
+  <div>
+    <span v-for="n in 10">{{ n }}</span>
+  </div>
   <div class="container">
     <h1>Vue.js Guide</h1>
 
     <mu-row gutter>
-      <mu-col class="spacing-bottom" v-for="post in posts" width="50" tablet="30" desktop="33">
+      <mu-col class="spacing-bottom" v-for="post in limit(posts, 6)" width="50" tablet="30" desktop="33">
         <mu-card >
           <mu-card-header title="Myron Avatar" subTitle="sub title">
             <mu-avatar :src="myron" slot="avatar"/>
@@ -28,10 +33,6 @@
     </mu-row>
 
 
-
-
-
-
   </div>
 
 
@@ -45,16 +46,27 @@
     name: 'vuejs',
     data() {
 
-
       return {
-
-        posts: []
+        posts: [],
+        object: {
+          FirstName: 'John',
+          LastName: 'Doe',
+          Age: 30
+        }
       };
     },
 
     created: function () {
       this.fetchPosts();
     },
+
+    filters: {
+      limit: function(arr, limit) {
+        return arr.slice(0, Number(limit))
+      }
+    },
+
+
 
     methods: {
       fetchPosts: function(){
@@ -72,6 +84,10 @@
           console.log('API responded with:', errorResponse.status);
         });
 
+      },
+
+      limit: function(posts,number) {
+        return this.posts.slice(0, number)
       }
     }
 
