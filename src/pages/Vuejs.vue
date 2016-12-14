@@ -31,6 +31,8 @@
 
         </mu-card>
       </mu-col>
+      <br>
+
     </mu-row>
 
 
@@ -49,6 +51,8 @@
 
       return {
         posts: [],
+
+        busy: false,
         object: {
           FirstName: 'John',
           LastName: 'Doe',
@@ -61,24 +65,16 @@
       this.fetchPosts();
     },
 
-    filters: {
-      limit: function(arr, limit) {
-        return arr.slice(0, Number(limit))
-      }
-    },
-
-
 
     methods: {
       fetchPosts: function(){
 
-        this.loading = true;
+        //this.loading = true;
 
         this.$http.get('../src/api/api.json').then((response) => {
 
           this.loading = false;
           this.posts = response.data;
-
         }, (errorResponse) => {
 
           // Handle error...
@@ -90,6 +86,7 @@
       limit: function(posts,number) {
         return this.posts.slice(0, number)
       }
+
     }
 
 
