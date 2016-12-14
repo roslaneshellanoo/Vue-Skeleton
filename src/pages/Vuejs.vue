@@ -1,17 +1,18 @@
 <template>
 
 <section class="vuejs">
+  
   <div v-for="(value, key, index) in object">
     {{ index }}. {{ key }} : {{ value }}
   </div>
   <div>
-    <span v-for="n in 10">{{ n }}</span>
+    <span v-for="n in 10"> {{ n }} |</span>
   </div>
   <div class="container">
     <h1>Vue.js Guide</h1>
 
     <mu-row gutter>
-      <mu-col class="spacing-bottom" v-for="post in limit(posts, 6)" width="50" tablet="30" desktop="33">
+      <mu-col class="spacing-bottom" v-for="post in limit(posts, 6)" width="50" tablet="50" desktop="33">
         <mu-card >
           <mu-card-header title="Myron Avatar" subTitle="sub title">
             <mu-avatar :src="myron" slot="avatar"/>

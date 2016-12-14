@@ -1,5 +1,9 @@
 <template>
     <div class="quiz">
+
+        <h1 class="loader" v-show="loading">
+            LOADER...
+        </h1>
         <div class="container">
 
             <h1 class="text-center">Javascript Quiz</h1>
@@ -15,11 +19,10 @@
 
                     </div>
 
-                    <mu-divider />
+                    <mu-divider/>
                     <br>
                     <ul class="list-reset">
                         <li v-for="response in question.responses">
-
 
 
                             <label class="mu-radio spacing-bottom">
@@ -65,7 +68,8 @@
                 <p>
                     Total score: {{ score() }} / {{ quiz.questions.length }}
                 </p>
-                <mu-raised-button v-on:click="refresh" label="Reload Quiz" class="demo-raised-button"
+                <mu-raised-button v-on:click="refresh" label="Reload Quiz"
+                                  class="demo-raised-button"
                                   primary/>
 
             </div>
@@ -80,16 +84,16 @@
 
 
         name: 'quiz',
+        loading: false,
         data() {
 
 
-let q1 =
+            let q1 =
 
-    "<pre><code>(function(x, f = () => x) { " +
-    "var x; var y = x; x = 2; " +
-    "return [x, y, f()]; " +
-    "})(1)</code></pre>";
-
+                    "<pre><code>(function(x, f = () => x) { " +
+                    "var x; var y = x; x = 2; " +
+                    "return [x, y, f()]; " +
+                    "})(1)</code></pre>";
 
 
             var quiz = {
@@ -102,8 +106,10 @@ let q1 =
                             {text: 'Wrong, too bad.', id: 1},
                             {text: 'Wrong, too bad.', id: 2},
                             {text: 'Wrong, too bad.', id: 3},
-                            {text:
-                                '<pre><code>document.getElementById("demo").innerHTML = "Hello World!";</code></pre>', id: 4}
+                            {
+                                text: '<pre><code>document.getElementById("demo").innerHTML = "Hello World!";</code></pre>',
+                                id: 4
+                            }
                         ],
                         answer: 4
 
@@ -120,6 +126,20 @@ let q1 =
                             {text: 'Wrong, too bad.', id: 4}
                         ],
                         answer: 2
+
+
+                    },
+
+                    {
+                        text: "Question 3",
+                        responses: [
+
+                            {text: 'RIGHT1', id: 1},
+                            {text: 'Wrong, too bad.', id: 2},
+                            {text: 'Wrong, too bad.', id: 3},
+                            {text: 'Wrong, too bad.', id: 4}
+                        ],
+                        answer: 1
 
 
                     }
@@ -148,7 +168,13 @@ let q1 =
         methods: {
 
             refresh: function () {
-                location.reload();
+
+                this.questionIndex = 0;
+                //this.loading = true;
+                console.log(this)
+
+
+
             },
 
             // Find out which option is the correct answer to this question
@@ -162,13 +188,18 @@ let q1 =
             prev: function () {
                 this.questionIndex--;
             },
+
+            reload: function () {
+                this.questionIndex--;
+
+            },
             // Return "true" count in userResponses
             score: function () {
                 var right_answers = 0;
                 var quizObj = this.quiz;
-                console.log(quizObj)
+                //console.log(quizObj)
                 this.userResponses.forEach(function (value, index) {
-                    console.dir(quizObj.questions[index].answer);
+                    //console.dir(quizObj.questions[index].answer);
                     if (quizObj.questions[index].answer == value) {
                         right_answers++;
                         console.info(right_answers);
@@ -191,28 +222,30 @@ let q1 =
             },
 
 
-
-
         },
 
 
         mounted: function () {
+
             this.$nextTick(function () {
 
+
                 Array.from(document.querySelectorAll('pre code'))
-                    .forEach((code) => {
-                        code.innerHTML = h(code.textContent)
-                    });
+                        .forEach((code) => {
+                            code.innerHTML = h(code.textContent)
+                        });
             })
         },
 
         updated: function () {
+
             this.$nextTick(function () {
 
+
                 Array.from(document.querySelectorAll('pre code'))
-                    .forEach((code) => {
-                        code.innerHTML = h(code.textContent)
-                    });
+                        .forEach((code) => {
+                            code.innerHTML = h(code.textContent)
+                        });
             })
         }
     }
