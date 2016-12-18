@@ -52,7 +52,7 @@
       return {
         posts: [],
 
-        busy: false,
+
         object: {
           FirstName: 'John',
           LastName: 'Doe',

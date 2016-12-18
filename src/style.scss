@@ -130,95 +130,77 @@ small { font-size: 75%; }
 
 /*
 
-Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-license.org/
+Dracula Theme v1.2.0
+
+https://github.com/zenorocha/dracula-theme
+
+Copyright 2015, All rights reserved
+
+Code licensed under the MIT license
+http://zenorocha.mit-license.org
+
+@author Éverton Ribeiro <nuxlli@gmail.com>
+@author Zeno Rocha <hi@zenorocha.com>
 
 */
 
-.hljs,
-pre{
+.hljs {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: #23241f;
-  font-family: menlo;
+  background: #282a36;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-section,
+.hljs-link {
+  color: #8be9fd;
+}
+
+.hljs-function .hljs-keyword {
+  color: #ff79c6;
 }
 
 .hljs,
-.hljs-tag,
-.hljs-subst,
-code .p{
+.hljs-subst {
   color: #f8f8f2;
 }
 
-.hljs-strong,
-.hljs-emphasis {
-  color: #a8a8a2;
-}
-
+.hljs-string,
+.hljs-title,
+.hljs-name,
+.hljs-type,
+.hljs-attribute,
+.hljs-symbol,
 .hljs-bullet,
-.hljs-quote,
-.hljs-number,
-.hljs-regexp,
-.hljs-literal,
-.hljs-link,
-code .v{
-  color: #ae81ff;
+.hljs-addition,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable {
+  color: #f1fa8c;
 }
 
-.hljs-code,
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion,
+.hljs-meta {
+  color: #6272a4;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
 .hljs-title,
 .hljs-section,
-.hljs-selector-class,
-code .f{
-  color: #27d06d;
-}
-
+.hljs-doctag,
+.hljs-type,
+.hljs-name,
 .hljs-strong {
   font-weight: bold;
 }
 
 .hljs-emphasis {
   font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-name,
-.hljs-attr,
-code .k
-{
-  color: #F92672;
-}
-
-.hljs-symbol,
-.hljs-attribute,
-code{
-  color: #66d9ef;
-}
-
-.hljs-params,
-.hljs-class .hljs-title {
-  color: #f8f8f2;
-}
-
-.hljs-string,
-.hljs-type,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-selector-id,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-addition,
-.hljs-variable,
-.hljs-template-variable,
-code .s
-{
-  color: #faff67;
-}
-
-.hljs-comment,
-.hljs-deletion,
-.hljs-meta,
-code .c{
-  color: #75715e;
 }

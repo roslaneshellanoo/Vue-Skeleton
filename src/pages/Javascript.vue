@@ -1,57 +1,55 @@
 <template>
-    <div class="demo-infinite-container">
-        <mu-list>
-            <template v-for="item in list">
-                <mu-list-item :title="item"/>
-                <mu-divider/>
-            </template>
-        </mu-list>
-        <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore" />
+    <div>
 
+
+        <div>{{ string | escapehtml}}</div>
+        <div v-html="string"></div>
+
+        <pre v-code>
+              <code>
+      Array.from(document.querySelectorAll('pre code'))
+          .forEach((code) => {
+                code.innerHTML = h(code.textContent)
+          });
+              </code>
+        </pre>
 
     </div>
+
+
 </template>
 
 <script>
-    import MuseUI from 'muse-ui'
+import {filterBy, reverse, findBy, escapehtml} from '../filters/filters'
     export default {
         name: 'javascript',
+        data() {
 
-        data () {
-            const list = []
-            for (let i = 0; i < 10; i++) {
-                list.push('item' + (i + 1))
-            }
             return {
-                list,
-                num: 10,
-                loading: false,
-                scroller: null,
-                loadingText: 'sdfsfs...'
+                string: '<p>Hello World</p>'
             }
-        },
-        mounted () {
-            this.scroller = this.$el
 
         },
+
+        filters: {
+            reverse,
+            filterBy,
+            findBy,
+            escapehtml
+        },
+
         methods: {
-            loadMore () {
-                this.loading = true
-                setTimeout(() => {
-                    for (let i = this.num; i < this.num + 10; i++) {
-                        this.list.push('item' + (i + 1))
-                    }
-                    this.num += 10
-                    this.loading = false
-                }, 1000)
-            }
+            reverse,
+            filterBy,
+            findBy,
+            escapehtml
         }
 
     }
 </script>
 
 <style lang="css">
-    .demo-infinite-container{
+    .demo-infinite-container {
         width: 256px;
         height: 300px;
         overflow: auto;

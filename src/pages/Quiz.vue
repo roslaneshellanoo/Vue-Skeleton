@@ -15,7 +15,7 @@
                 <div v-show="index === questionIndex">
                     <br>
 
-                    <div v-html="question.text">
+                    <div v-html="escapehtml(question.text)">
 
                     </div>
 
@@ -80,6 +80,8 @@
 
 <script>
     //import AppNavDrawer from 'Navigation/AppNavDrawer'
+
+    import {filterBy, reverse, findBy, escapehtml} from '../filters/filters'
     export default {
 
 
@@ -90,7 +92,7 @@
 
             let q1 =
 
-                    "<pre><code>(function(x, f = () => x) { " +
+                    "<pre v-code><code>(function(x, f = () => x) { " +
                     "var x; var y = x; x = 2; " +
                     "return [x, y, f()]; " +
                     "})(1)</code></pre>";
@@ -107,7 +109,7 @@
                             {text: 'Wrong, too bad.', id: 2},
                             {text: 'Wrong, too bad.', id: 3},
                             {
-                                text: '<pre><code>document.getElementById("demo").innerHTML = "Hello World!";</code></pre>',
+                                text: '<pre v-code><code>document.getElementById("demo").innerHTML = "Hello World!";</code></pre>',
                                 id: 4
                             }
                         ],
@@ -167,6 +169,8 @@
 
         methods: {
 
+            escapehtml,
+
             refresh: function () {
 
                 this.questionIndex = 0;
@@ -222,32 +226,10 @@
             },
 
 
-        },
-
-
-        mounted: function () {
-
-            this.$nextTick(function () {
-
-
-                Array.from(document.querySelectorAll('pre code'))
-                        .forEach((code) => {
-                            code.innerHTML = h(code.textContent)
-                        });
-            })
-        },
-
-        updated: function () {
-
-            this.$nextTick(function () {
-
-
-                Array.from(document.querySelectorAll('pre code'))
-                        .forEach((code) => {
-                            code.innerHTML = h(code.textContent)
-                        });
-            })
         }
+
+
+
     }
 </script>
 

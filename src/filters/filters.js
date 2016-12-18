@@ -17,4 +17,20 @@ function reverse(value) {
     return value.split('').reverse().join('');
 }
 
-export {filterBy, reverse, findBy}
+function escapehtml(text) {
+
+    let entityRE = /[&<>]/g;
+
+    function escapeEntity(entity) {
+        var entityMap = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+        };
+        return entityMap[entity];
+    }
+
+    return String(text).replace(entityRE, escapeEntity);
+}
+
+export {filterBy, reverse, findBy, escapehtml}
