@@ -161,6 +161,8 @@ const app = new Vue({
                 isActive: false
             }
 
+
+
         },
 
         methods: {
@@ -183,7 +185,12 @@ const app = new Vue({
                     //Reset newTask to an empty string so the input field is cleared
                     this.newlibrary = "";
 
+
+
                 }
+
+
+
             },
 
             deleteLibraries: function () {
@@ -196,6 +203,7 @@ const app = new Vue({
 
             removeLibrary: function (library) {
                 this.libraries.splice(this.libraries.indexOf(library), 1)
+
             },
 
             markLibrary: function () {
@@ -204,15 +212,17 @@ const app = new Vue({
             }
         },
 
-        mounted: function () {
-            this.$nextTick(function () {
-
-                Array.from(document.querySelectorAll('pre code'))
-                    .forEach((code) => {
-                        code.innerHTML = h(code.textContent)
-                    });
-            })
-        }
+//        mounted: function () {
+//
+//            this.$nextTick(function () {
+//
+//                Array.from(document.querySelectorAll('pre code'))
+//                    .forEach((code) => {
+//                        code.innerHTML = h(code.textContent)
+//                    });
+//
+//            })
+//        }
     }
 </script>
 

@@ -7,19 +7,56 @@
             <mu-badge content="alpha" class="exmaples-version" secondary/>
         </mu-appbar>
         <mu-divider/>
-        <mu-list @itemClick="docked ? '' : toggle()">
-            <mu-list-item title="Menu Item 1"/>
-            <mu-list-item title="Menu Item 2"/>
+        <mu-list class="sidebar-nav" @itemClick="docked ? '' : toggle()">
+            <mu-list-item >
+                <router-link to="/quiz">Javascript Quiz</router-link>
+            </mu-list-item>
+            <mu-list-item >
+                <router-link to="/quiz">Vue.js Quiz</router-link>
+            </mu-list-item>
             <mu-list-item title="Menu Item 3"/>
             <mu-list-item v-if="docked" @click.native="open = false" title="Close"/>
         </mu-list>
+
+
+
+        <mu-list >
+
+            <mu-list-item title="Inbox"  toggleNested :inset="inset">
+
+
+                <mu-icon slot="left" value="inbox"/>
+
+                <mu-list-item slot="nested" title="Starred">
+                    <mu-icon slot="left" value="grade"/>
+                </mu-list-item>
+
+
+
+
+
+            </mu-list-item>
+        </mu-list>
+
+
     </mu-drawer>
 </template>
 
 
 <script>
     export default {
+
+
+
+        data() {
+
+            return{
+                inset: true
+            }
+        },
+
         props: {
+
             open: {
                 type: Boolean,
                 default: true
@@ -39,5 +76,7 @@
 </script>
 
 <style lang="sass">
-
+    .mu-list.sidebar-nav .active {
+        text-decoration: none;
+    }
 </style>

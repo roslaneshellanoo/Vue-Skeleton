@@ -7,7 +7,7 @@ import App from './App.vue'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import './style.scss'
-import hljs from 'highlight.js'
+//import hljs from 'highlight.js'
 //import code from 'directives/codehighlight'
 
 
@@ -20,10 +20,10 @@ Vue.use(VueAxios, axios)
 //       hljs.highlightBlock(this.el)
 // })
 
-Vue.directive('code', function (el, binding) {
-      console.log(el.children[0].children)
-      hljs.highlightBlock(el)
-});
+// Vue.directive('code', function (el, binding) {
+//       //console.log(el.children[0].children)
+//       hljs.highlightBlock(el)
+// });
 
 // Vue.directive('highlight', (el) => {
 //       code.innerHTML = h(code.textContent)

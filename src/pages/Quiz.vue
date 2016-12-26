@@ -1,12 +1,34 @@
 <template>
     <div class="quiz">
-
-        <h1 class="loader" v-show="loading">
-            LOADER...
-        </h1>
         <div class="container">
 
             <h1 class="text-center">Javascript Quiz</h1>
+
+            <mu-stepper :activeStep="activeStep">
+                <mu-step>
+                    <mu-step-label>
+
+                    </mu-step-label>
+                </mu-step>
+                <mu-step>
+                    <mu-step-label>
+
+                    </mu-step-label>
+                </mu-step>
+                <mu-step>
+                    <mu-step-label>
+
+                    </mu-step-label>
+                </mu-step>
+                <mu-step>
+                    <mu-step-label>
+
+                    </mu-step-label>
+                </mu-step>
+
+
+            </mu-stepper>
+
 
             <!-- index is used to check with current question index -->
 
@@ -15,9 +37,12 @@
                 <div v-show="index === questionIndex">
                     <br>
 
-                    <div v-html="escapehtml(question.text)">
+                    <h4>
+                        {{ questionIndex +1 }}.
+                        <span v-html="question.text">
 
-                    </div>
+                        </span>
+                    </h4>
 
                     <mu-divider/>
                     <br>
@@ -43,7 +68,9 @@
                                         <i aria-hidden="true"
                                            class="mu-icon material-icons mu-radio-icon-checked radio_button_checked">radio_button_checked</i>
                                     </div>
-                                    <div class="mu-radio-label" v-html="response.text"></div>
+                                    <div class="mu-radio-label" >
+                                        {{ response.text }}
+                                    </div>
                                 </div>
                                 <!---->
                             </label>
@@ -55,7 +82,7 @@
                     <!-- The two navigation buttons -->
                     <!-- Note: prev is hidden on first question -->
                     <mu-raised-button v-if="questionIndex > 0" v-on:click="prev" label="Prev"
-                                      class="demo-raised-button" primary/>
+                                      class="demo-raised-button" />
                     <mu-raised-button v-on:click="next" label="Next" class="demo-raised-button"
                                       primary/>
 
@@ -90,26 +117,18 @@
         data() {
 
 
-            let q1 =
-
-                    "<pre v-code><code>(function(x, f = () => x) { " +
-                    "var x; var y = x; x = 2; " +
-                    "return [x, y, f()]; " +
-                    "})(1)</code></pre>";
-
-
             var quiz = {
                 title: 'My quiz',
                 questions: [
                     {
-                        text: q1,
+                        text: 'Inside which HTML element do we put the JavaScript?',
                         responses: [
 
-                            {text: 'Wrong, too bad.', id: 1},
-                            {text: 'Wrong, too bad.', id: 2},
-                            {text: 'Wrong, too bad.', id: 3},
+                            {text: '<javascript>', id: 1},
+                            {text: '<scripting>', id: 2},
+                            {text: '<js>', id: 3},
                             {
-                                text: '<pre v-code><code>document.getElementById("demo").innerHTML = "Hello World!";</code></pre>',
+                                text: '<script>',
                                 id: 4
                             }
                         ],
@@ -136,12 +155,26 @@
                         text: "Question 3",
                         responses: [
 
-                            {text: 'RIGHT1', id: 1},
-                            {text: 'Wrong, too bad.', id: 2},
+                            {text: 'Wrong, too bad.', id: 1},
+                            {text: 'Right2', id: 2},
                             {text: 'Wrong, too bad.', id: 3},
                             {text: 'Wrong, too bad.', id: 4}
                         ],
-                        answer: 1
+                        answer: 2
+
+
+                    },
+
+                    {
+                        text: "Question 4",
+                        responses: [
+
+                            {text: 'Wrong, too bad.', id: 1},
+                            {text: 'Right2', id: 2},
+                            {text: 'Wrong, too bad.', id: 3},
+                            {text: 'Wrong, too bad.', id: 4}
+                        ],
+                        answer: 2
 
 
                     }
@@ -151,6 +184,8 @@
             };
 
             return {
+
+                activeStep: 0,
 
                 quiz: quiz,
                 // Store current question index
@@ -174,10 +209,9 @@
             refresh: function () {
 
                 this.questionIndex = 0;
+                this.activeStep = 0;
                 //this.loading = true;
                 console.log(this)
-
-
 
             },
 
@@ -186,11 +220,13 @@
             // Go to next question
             next: function () {
                 this.questionIndex++;
+                this.activeStep++;
 
             },
             // Go to previous question
             prev: function () {
                 this.questionIndex--;
+                this.activeStep--;
             },
 
             reload: function () {
@@ -226,10 +262,56 @@
             },
 
 
-        }
+        },
 
 
+        computed: {
+            content () {
+                let message = '';
+                switch (this.activeStep) {
+                    case 0:
+                        message = 'Question message 1';
+                        break;
+                    case 1:
+                        message = 'Question message 2';
+                        break;
+                    case 2:
+                        message = 'Question message 3';
+                        break;
+                    case 3:
+                        message = 'Question message 4';
+                        break;
+                    default:
+                        message = 'fuck! 又 TM 出错了！！！';
+                        break
+                }
+                return message
+            },
+            finished () {
+                return this.activeStep > 2
+            }
+        },
 
+
+//        mounted: function () {
+//            this.$nextTick(function () {
+//
+//                Array.from(document.querySelectorAll('pre code'))
+//                    .forEach((code) => {
+//                        code.innerHTML = h(code.textContent)
+//                    });
+//            })
+//        },
+//
+//        updated: function () {
+//            this.$nextTick(function () {
+//
+//                Array.from(document.querySelectorAll('pre code'))
+//                    .forEach((code) => {
+//                        code.innerHTML = h(code.textContent)
+//                    });
+//            })
+//        }
     }
 </script>
 
