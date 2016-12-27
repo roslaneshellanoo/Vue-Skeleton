@@ -35,6 +35,12 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: /node_modules/
             },
+
+            {
+                test: /\.md$/,
+                loader: 'raw-loader'
+            },
+
             {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: 'file-loader',

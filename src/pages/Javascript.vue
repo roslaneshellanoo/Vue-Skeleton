@@ -1,131 +1,51 @@
 <template>
-    <div class="demo-step-container">
-        <mu-stepper :activeStep="activeStep">
-            <mu-step>
-                <mu-step-label>
 
-                </mu-step-label>
-            </mu-step>
-            <mu-step>
-                <mu-step-label>
-
-                </mu-step-label>
-            </mu-step>
-            <mu-step>
-                <mu-step-label>
-
-                </mu-step-label>
-            </mu-step>
-            <mu-step>
-                <mu-step-label>
-
-                </mu-step-label>
-            </mu-step>
-
-
-
-        </mu-stepper>
-        <div class="demo-step-content">
-            <p v-if="finished">
-                We have completed it! <a href="javascript:" @click="reset">Click Here</a> To Reset
-            </p>
-            <template v-if="!finished">
-                <p>
-                    {{content}}
-                </p>
-                <div>
-                    <mu-flat-button class="demo-step-button" label="Prev" :disabled="activeStep === 0" @click="handlePrev"/>
-                    <mu-raised-button class="demo-step-button" :label="activeStep === 2 ? 'Next2' : 'Next'" primary @click="handleNext"/>
-                </div>
-            </template>
-        </div>
+    <div>
+        <mu-tabs :value="theme" @change="changeTheme">
+            <mu-tab title="LIGHT (DEFAULT)" value="light"/>
+            <mu-tab title="DARK" value="dark"/>
+            <mu-tab title="CARBON" value="carbon"/>
+            <mu-tab title="TEAL" value="teal"/>
+        </mu-tabs>
     </div>
 
-
 </template>
-
 <script>
-import {filterBy, reverse, findBy, escapehtml} from '../filters/filters'
+    import light from '!raw-loader!muse-ui/dist/theme-default.css'
+    import dark from '!raw-loader!muse-ui/dist/theme-dark.css'
+    import carbon from '!raw-loader!muse-ui/dist/theme-carbon.css'
+    import teal from '!raw-loader!muse-ui/dist/theme-teal.css'
+
+
     export default {
-        name: 'javascript',
-        data() {
-
+        data () {
             return {
-                string: '<p>Hello World</p>',
-                activeStep: 0
-            }
-
-        },
-
-        filters: {
-            reverse,
-            filterBy,
-            findBy,
-            escapehtml
-        },
-
-        computed: {
-            content () {
-                let message = '';
-                switch (this.activeStep) {
-                    case 0:
-                        message = 'Question message 1';
-                        break;
-                    case 1:
-                        message = 'Question message 2';
-                        break;
-                    case 2:
-                        message = 'Question message 3';
-                        break;
-                    case 3:
-                        message = 'Question message 4';
-                        break;
-                    default:
-                        message = 'fuck! 又 TM 出错了！！！';
-                        break
+                theme: 'light',
+                themes: {
+                    light,
+                    dark,
+                    carbon,
+                    teal
                 }
-                return message
-            },
-            finished () {
-                return this.activeStep > 2
             }
         },
 
         methods: {
-            reverse,
-            filterBy,
-            findBy,
-            escapehtml,
-
-
-            handleNext () {
-                this.activeStep++
+            changeTheme (theme) {
+                this.theme = theme
+                const styleEl = this.getThemeStyle()
+                styleEl.innerHTML = this.themes[theme] || ''
             },
-            handlePrev () {
-                this.activeStep--
-            },
-            reset () {
-                this.activeStep = 0
+            getThemeStyle () {
+                const themeId = 'muse-theme'
+                let styleEl = document.getElementById(themeId)
+                if (styleEl) return styleEl
+                styleEl = document.createElement('style')
+                styleEl.id = themeId
+                document.body.appendChild(styleEl)
+                return styleEl
             }
         }
-
-
     }
 </script>
 
-<style lang="css">
-    .demo-step-container {
-        width: 100%;
-        /*max-width: 700px;*/
-        margin: auto;
-    }
-
-    .demo-step-content {
-        margin: 0  16px;
-    }
-
-    .demo-step-button {
-        margin-top: 12px;
-        margin-right: 12px;
-    }
-</style>
