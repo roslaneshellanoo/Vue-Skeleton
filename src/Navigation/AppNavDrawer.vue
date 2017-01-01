@@ -22,7 +22,7 @@
 
         <mu-list >
 
-            <mu-list-item title="Inbox"  toggleNested :inset="inset">
+            <mu-list-item title="Inbox"  toggleNested :newopen="newopen">
 
 
                 <mu-icon slot="left" value="inbox"/>
@@ -30,10 +30,6 @@
                 <mu-list-item slot="nested" title="Starred">
                     <mu-icon slot="left" value="grade"/>
                 </mu-list-item>
-
-
-
-
 
             </mu-list-item>
         </mu-list>
@@ -50,8 +46,10 @@
 
         data() {
 
+
+
             return{
-                inset: true
+
             }
         },
 
