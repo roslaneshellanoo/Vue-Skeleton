@@ -1,13 +1,9 @@
 <template>
 
     <div>
-        <input
-                type="checkbox"
-                v-model="toggle"
-                v-bind:true-value="a"
-                v-bind:false-value="b"
-        >
-        <mu-switch label="默认为 true" v-model="toggle" class="demo-switch" /><br/>
+
+
+        <mu-switch @change="changeTheme('dark')" label="默认为 true" v-model="toggle" class="demo-switch" /><br/>
 
         <mu-tabs :value="theme" @change="changeTheme">
             <mu-tab title="LIGHT (DEFAULT)" value="light"/>
@@ -30,15 +26,13 @@
 
             return {
 
-                string: '<p>Hello World</p>',
-                activeStep: 0,
                 theme: 'dark',
                 themes: {
-
                     dark
-
                 },
-                toggle: false
+                toggle: false,
+                message: ''
+
             }
 
         },
@@ -66,7 +60,7 @@
                 this.theme = theme
                 const styleEl = this.getThemeStyle()
                 styleEl.innerHTML = this.themes[theme] || ''
-                console.dir(this.getThemeStyle())
+                console.log(styleEl)
             },
             getThemeStyle () {
                 const themeId = 'muse-theme'
@@ -81,9 +75,9 @@
 
         mounted: function () {
             this.$nextTick(function () {
-                console.log(this.themes.dark)
+                // console.log(this.themes.dark)
             })
-        },
+        }
 
 
 
