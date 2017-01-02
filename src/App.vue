@@ -11,6 +11,10 @@
             <router-link to="/vuejs">Go to Vue.js</router-link>
             <router-link to="/quiz">Quiz</router-link>
             <mu-icon-button icon='expand_more' slot="right"/>
+
+            <mu-switch @change="checkNum" label="Change Theme" v-model="theme_checked"
+                       class="demo-switch"  />
+
         </mu-appbar>
 
         <div class="wrapper" :class="{'nav-hide': !open}">
@@ -26,6 +30,9 @@
 </template>
 
 <script>
+    import light from '!raw-loader!muse-ui/dist/theme-default.css'
+    import dark from '!raw-loader!muse-ui/dist/theme-dark.css'
+
     import Home from './pages/Home.vue'
     import Javascript from './pages/Javascript.vue'
     import Vuejs from './pages/Vuejs.vue'
@@ -41,7 +48,13 @@
         data() {
             return {
                 open: true,
-                docked: true
+                docked: true,
+                theme: 'dark',
+                themes: {
+                    light,
+                    dark
+                },
+                theme_checked: false
             };
         },
 
@@ -53,6 +66,31 @@
 
             toggleNav () {
                 this.open = !this.open
+            },
+
+            getThemeStyle: function () {
+                const themeId = 'muse-theme';
+                let styleEl = document.getElementById(themeId);
+                if (styleEl) return styleEl
+                styleEl = document.createElement('style');
+                styleEl.id = themeId;
+                document.body.appendChild(styleEl);
+                return styleEl
+            },
+
+            changeTheme: function (theme) {
+                this.theme = theme;
+                const styleEl = this.getThemeStyle();
+                styleEl.innerHTML = this.themes[theme] || '';
+                console.log(styleEl)
+            },
+
+            checkNum: function() {
+                if(this.theme_checked === true) {
+                    this.changeTheme('light')
+                } else {
+                    this.changeTheme('dark')
+                }
             }
         }
     }
@@ -111,6 +149,13 @@
         top: 0;
         left: 256px;
         transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+
+
+    }
+
+    .header-nav-bar .mu-switch-label {
+        font-size: 1rem;
+        color: #fff;
     }
 
     .header-nav-bar.nav-hide {

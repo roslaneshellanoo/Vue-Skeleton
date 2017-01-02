@@ -1,9 +1,10 @@
 <template>
     <div>
 
-        <input type="checkbox" v-model="checked" @change="checkNum" />
+        <!--<input type="checkbox" v-model="checked" @change="checkNum" />-->
 
-        <mu-switch @change="checkNum" label="默认为 true" v-model="checked" class="demo-switch" /><br/>
+        <mu-switch @change="checkNum" label="Change Theme" v-model="theme_checked"
+                   class="demo-switch" /><br/>
 
         <mu-tabs :value="theme" @change="changeTheme">
             <mu-tab title="LIGHT (DEFAULT)" value="light"/>
@@ -30,8 +31,7 @@
                     light,
                     dark
                 },
-                toggle: false,
-                checked: false
+                theme_checked: false
             }
 
         },
@@ -71,7 +71,7 @@
             },
 
             checkNum: function() {
-                if(this.checked === true) {
+                if(this.theme_checked === true) {
                     this.changeTheme('light')
                 } else {
                     this.changeTheme('dark')
