@@ -23,7 +23,6 @@
                                     >
 
 
-
                                         <mu-checkbox class="demo-checkbox"
                                                      v-model="library.isActive"
                                                      slot="left"
@@ -35,7 +34,6 @@
                                         <!--<mu-icon value="call" color="indigo" slot="left"/>-->
 
 
-
                                         <mu-icon v-on:click="removeLibrary(library)"
                                                  value="remove_circle"
                                                  slot="right"
@@ -45,9 +43,7 @@
                                         />
 
 
-
                                     </mu-list-item>
-
 
 
                                 </mu-list>
@@ -85,43 +81,6 @@
 
                                 <div class="row">
 
-                                    <pre>
-                                        <code>
-import Vue from 'vue'
-import VueResource from 'vue-resource'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import router from './router'
-import App from './App.vue'
-import MuseUI from 'muse-ui'
-import 'muse-ui/dist/muse-ui.css'
-import './style.scss'
-
-
-
-
-Vue.use(MuseUI)
-Vue.use(VueResource)
-Vue.use(VueAxios, axios)
-
-
-
-const app = new Vue({
-      el: '#app',
-      components: {
-            // all components already registered
-      },
-
-      router,
-      render: h => h(App)
-})
-
-
-
-
-
-                                        </code>
-                                    </pre>
 
                                 </div>
 
@@ -130,7 +89,6 @@ const app = new Vue({
                         </div>
                     </mu-content-block>
                 </div>
-
 
                 <!---------------------------------------------->
 
@@ -150,7 +108,6 @@ const app = new Vue({
         data() {
 
 
-
             return {
 
                 libraries: [],
@@ -160,7 +117,6 @@ const app = new Vue({
 
                 isActive: false
             }
-
 
 
         },
@@ -186,9 +142,7 @@ const app = new Vue({
                     this.newlibrary = "";
 
 
-
                 }
-
 
 
             },

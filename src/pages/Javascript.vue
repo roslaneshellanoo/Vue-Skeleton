@@ -1,38 +1,37 @@
 <template>
-
     <div>
 
+        <input type="checkbox" v-model="checked" @change="checkNum" />
 
-        <mu-switch @change="changeTheme('dark')" label="默认为 true" v-model="toggle" class="demo-switch" /><br/>
+        <mu-switch @change="checkNum" label="默认为 true" v-model="checked" class="demo-switch" /><br/>
 
         <mu-tabs :value="theme" @change="changeTheme">
             <mu-tab title="LIGHT (DEFAULT)" value="light"/>
             <mu-tab title="DARK" value="dark"/>
 
         </mu-tabs>
-    </div>
 
+    </div>
 </template>
 
 <script>
 
-
+    import light from '!raw-loader!muse-ui/dist/theme-default.css'
     import dark from '!raw-loader!muse-ui/dist/theme-dark.css'
     import {filterBy, reverse, findBy, escapehtml} from '../filters/filters'
     export default {
         name: 'javascript',
         data() {
 
-
             return {
 
                 theme: 'dark',
                 themes: {
+                    light,
                     dark
                 },
                 toggle: false,
-                message: ''
-
+                checked: false
             }
 
         },
@@ -54,23 +53,32 @@
             findBy,
             escapehtml,
 
+            getThemeStyle: function () {
+                const themeId = 'muse-theme';
+                let styleEl = document.getElementById(themeId);
+                if (styleEl) return styleEl
+                styleEl = document.createElement('style');
+                styleEl.id = themeId;
+                document.body.appendChild(styleEl);
+                return styleEl
+            },
 
-
-            changeTheme (theme) {
-                this.theme = theme
-                const styleEl = this.getThemeStyle()
-                styleEl.innerHTML = this.themes[theme] || ''
+            changeTheme: function (theme) {
+                this.theme = theme;
+                const styleEl = this.getThemeStyle();
+                styleEl.innerHTML = this.themes[theme] || '';
                 console.log(styleEl)
             },
-            getThemeStyle () {
-                const themeId = 'muse-theme'
-                let styleEl = document.getElementById(themeId)
-                if (styleEl) return styleEl
-                styleEl = document.createElement('style')
-                styleEl.id = themeId
-                document.body.appendChild(styleEl)
-                return styleEl
+
+            checkNum: function() {
+                if(this.checked === true) {
+                    this.changeTheme('light')
+                } else {
+                    this.changeTheme('dark')
+                }
             }
+
+
         },
 
         mounted: function () {
