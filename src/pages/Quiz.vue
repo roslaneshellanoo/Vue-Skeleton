@@ -88,6 +88,7 @@
 
                 </div>
             </div>
+
             <div v-show="questionIndex === quiz.questions.length">
                 <h2>
                     Quiz finished

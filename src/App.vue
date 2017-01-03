@@ -143,7 +143,7 @@
     }
 
     .header-nav-bar {
-        background-color: #167a8b;
+        background-color: #463c7d;
         position: fixed;
         z-index: 999;
         top: 0;
@@ -151,6 +151,10 @@
         transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 
 
+    }
+
+    .mu-appbar {
+        background-color: #463c7d!important;
     }
 
     .header-nav-bar .mu-switch-label {
